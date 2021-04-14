@@ -4,7 +4,7 @@ const express = require ('express');
 const data = require('./data');
 
 const accountRoutes = require('./routes/accounts');
-const serviceRoutes = require('./routes/services');
+const servicesRoutes = require('./routes/services');
 
 const port = 3000;
 
@@ -29,7 +29,7 @@ app.get('/profile', function(req,res){
 });
 
 app.use('/account',accountRoutes);
-app.use('/services',serviceRoutes);
+app.use('/services',servicesRoutes);
 
 app.listen(port, () => {
     console.log(`PS Project Running on port ${port}!`);
