@@ -47,16 +47,16 @@ app.get('/payment', function(req,res){
 });
 
 app.post('/payment',function(req,res){
-    accounts.credit.balance -= parseFloat(req.body.amount);
-    accounts.credit.available += parseFloat(req.body.amount);
+    accounts.credit.balance -= parseInt(req.body.amount);
+    accounts.credit.available += parseInt(req.body.amount,10);
     const accountsJSON = JSON.stringify(accounts, null, 4);
     fs.writeFileSync(path.join(__dirname,'json/accounts.json'),accountsJSON,'utf-8');
     res.render('payment', { message: "Payment Successful", account: accounts.credit });
 });
 
 app.post('/transfer',function(req,res){
-    accounts[req.body.from].balance -= parseFloat(req.body.amount);
-    accounts[req.body.to].balance += parseFloat(req.body.amount);
+    accounts[req.body.from].balance -= parseInt(req.body.amount);
+    accounts[req.body.to].balance += parseInt(req.body.amount);
     const accountsJSON = JSON.stringify(accounts, null, 4);
     fs.writeFileSync(path.join(__dirname,'json/accounts.json'),accountsJSON,'utf-8');
     res.render('transfer', {message: "Transfer Completed"});
