@@ -8,7 +8,7 @@ const app = express();
 
 const accounts = data.accounts;
 const users = data.users;
-const writeJson = data.writeJson;
+const writeJSON = data.writeJSON;
 
 app.set( 'view engine' , 'ejs');
 app.set( 'views', path.join(__dirname,'/views'));
@@ -47,14 +47,14 @@ app.get('/payment', function(req,res){
 app.post('/payment',function(req,res){
     accounts.credit.balance -= parseInt(req.body.amount);
     accounts.credit.available += parseInt(req.body.amount,10);
-    writeJson();
+    writeJSON();
     res.render('payment', { message: "Payment Successful", account: accounts.credit });
 });
 
 app.post('/transfer',function(req,res){
     accounts[req.body.from].balance -= parseInt(req.body.amount);
     accounts[req.body.to].balance += parseInt(req.body.amount);
-    writeJson();
+    writeJSON();
     res.render('transfer', {message: "Transfer Completed"});
 });
 
