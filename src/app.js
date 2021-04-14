@@ -49,7 +49,8 @@ app.get('/payment', function(req,res){
 app.post('/payment',function(req,res){
     accounts.credit.balance -= parseFloat(req.body.amount);
     accounts.credit.available += parseFloat(req.body.amount);
-    fs.writeFileSync(path.join(__dirname,'json/accounts.json'),JSON.stringify.accounts,'utf-8');
+    const accountsJSON = JSON.stringify(accounts);
+    fs.writeFileSync(path.join(__dirname,'json/accounts.json'),accountsJSON,'utf-8');
     res.render('payment', { message: "Payment Successful", account: accounts.credit });
 });
 
